@@ -9,7 +9,7 @@
   "scripts": {
     "build": "rm -rf lib && babel src -d lib --ignore 'src/**/templates/' --copy-files --include-dotfiles --extensions '.ts'",
     "dev": "babel src -d lib --watch --skip-initial-build --extensions '.ts'",
-    "prettier": "prettier --write \"./src/**/*.{ts,ts,json}\""
+    "prettier": "prettier --write \"./src/**/*.{ts,js,json}\""
   },
   "keywords": [
     "cli"
@@ -19,7 +19,8 @@
   "dependencies": {
     "@typescript-eslint/parser": "^5.10.1",
     "commander": "^8.3.0",
-    "core-js": "^3.20.3"
+    "core-js": "^3.20.3",
+    "glob": "^7.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.8",

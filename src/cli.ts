@@ -1,4 +1,5 @@
 import { Command } from 'commander';
+import glob from 'glob';
 
 import pkg from '../package.json';
 
@@ -32,6 +33,25 @@ Example call:
     );
 
   program.addHelpText('beforeAll', `hello world ******`);
+
+  program
+    .command('glob')
+    .action(() => {
+      console.log('$', glob.sync('*.js', {
+        ignore: 'node_modules/**/*.js',
+        matchBase: true
+      }));
+      console.log('$$', glob.sync('.*.js'));
+      console.log('$$$', glob.sync('*.{js,json,ts}', {
+        ignore: 'node_modules/**/*.*',
+        matchBase: true
+      }));
+
+      console.log('$$$$', glob.sync('c?*.{js,json,ts}', {
+        ignore: 'node_modules/**/*.*',
+        matchBase: true
+      }));
+    });
 
   program.parse();
 
