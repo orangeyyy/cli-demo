@@ -41,7 +41,7 @@ export default class CompGenerator extends Generator {
       name: 'type',
       choices: ['class', 'function'],
       message: 'what kind of the component?',
-      default: 'class'
+      default: this.config.get('type') || 'class'
     }]);
 
     this.answer = answer;

@@ -66,6 +66,8 @@ export default class ProjectGenerator extends Generator {
     const sourceRoot = this.sourceRoot();
     this.log(`+++${JSON.stringify(this.answer, null, 2)}`);
     this.log(`prettier: ${this.options.prettier}`);
+    this.config.set('react', this.answer?.react);
+    this.config.set('type', 'function');
     return new Promise<void>((resolve, reject) => {
       walker(sourceRoot)
         .on('dir', (dir: string) => {
@@ -103,6 +105,7 @@ export default class ProjectGenerator extends Generator {
   }
 
   end() {
+    this.config.save();
     this.log('project init finished !!!');
   }
 }
