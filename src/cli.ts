@@ -1,6 +1,7 @@
 import { Command } from 'commander';
 import glob from 'glob';
 import Init from './yeoman';
+import proxy, {close} from './anyproxy';
 
 import pkg from '../package.json';
 
@@ -58,9 +59,10 @@ Example call:
 
   program
     .command('project')
-    .argument('<path>', '地址')
+    .argument('[path]', '地址')
     .option('-p, --prettier', '是否使用prettier')
     .action((path, options) => {
+      console.log(path, options);
       init.init('project', {
         prettier: true
       });
@@ -68,8 +70,19 @@ Example call:
 
   program
     .command('component')
-    .action((path, options) => {
+    .action(() => {
       init.init('component');
+    });
+
+  program
+    .command('proxy')
+    .option('-c, -close', 'close the proxy')
+    .action((options) => {
+      if (options.close) {
+        close();
+      } else {
+        proxy();
+      }
     });
 
   program.parse();
