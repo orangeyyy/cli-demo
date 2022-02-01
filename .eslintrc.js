@@ -29,10 +29,7 @@ module.exports = {
     ],
     // class的方法必须声明public/private，constructors除外
     "@typescript-eslint/explicit-member-accessibility": ["error", {
-      accessibility: 'explicit',
-      overrides: {
-        constructors: 'no-public',
-      },
+      accessibility: 'no-public',
     }],
   }
 };

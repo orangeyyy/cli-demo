@@ -1,7 +1,10 @@
 import { Command } from 'commander';
 import glob from 'glob';
+import Init from './yeoman';
 
 import pkg from '../package.json';
+
+const init = new Init();
 
 export const exec = () => {
   const program = new Command();
@@ -51,6 +54,22 @@ Example call:
         ignore: 'node_modules/**/*.*',
         matchBase: true
       }));
+    });
+
+  program
+    .command('project')
+    .argument('<path>', '地址')
+    .option('-p, --prettier', '是否使用prettier')
+    .action((path, options) => {
+      init.init('project', {
+        prettier: true
+      });
+    });
+
+  program
+    .command('component')
+    .action((path, options) => {
+      init.init('component');
     });
 
   program.parse();
