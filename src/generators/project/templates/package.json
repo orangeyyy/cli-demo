@@ -13,7 +13,10 @@
     "dev": "babel src -d lib --watch --skip-initial-build --extensions '.ts'",
     "prettier": "prettier --write \"./src/**/*.{ts,js,json}\""
   },
-  "keywords": ["<%- tags.join('","')%>"],
+  "keywords": [
+    "<%- tags.join('",
+    "')%>"
+  ],
   "escape": "<%= escapeStr%>",
   "noEscape": "<%- escapeStr%>",
   "noSpace": "<%_ escapeStr_%>",

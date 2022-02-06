@@ -2,6 +2,9 @@ module.exports = {
   root: true,
   env: {
     node: true,
+    browser: true,
+    es6: true,
+    jest: true,
   },
   parser: require.resolve("@typescript-eslint/parser"),
   extends: [

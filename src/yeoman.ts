@@ -1,7 +1,6 @@
 import Environment from 'yeoman-environment';
 import path from 'path';
 
-
 export default class Env {
   env: Environment;
   constructor() {
@@ -14,16 +13,19 @@ export default class Env {
   init = async (type: string, opts = {}) => {
     debugger;
     return new Promise<void>((resolve, reject) => {
-      this.env.run(`init:${type}`, opts).then((err) => {
-        if (err) {
+      this.env.run(`init:${type}`, opts).then(
+        (err) => {
+          if (err) {
+            console.error(err.message || 'got some error!');
+            reject();
+          }
+          resolve();
+        },
+        (err) => {
           console.error(err.message || 'got some error!');
           reject();
         }
-        resolve();
-      }, (err) => {
-        console.error(err.message || 'got some error!');
-        reject();
-      });
+      );
     });
-  }
+  };
 }

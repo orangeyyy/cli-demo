@@ -1,4 +1,4 @@
-import Generator, {GeneratorOptions} from 'yeoman-generator';
+import Generator, { GeneratorOptions } from 'yeoman-generator';
 import path from 'path';
 import fs from 'fs-extra';
 import chalk from 'chalk';
@@ -17,50 +17,57 @@ export default class ProjectGenerator extends Generator {
   constructor(args: string | string[], opts: GeneratorOptions) {
     super(args, opts);
     console.log('***', opts);
-    this.argument("path", { type: String, required: false });
+    this.argument('path', { type: String, required: false });
 
-    this.option("prettier");
+    this.option('prettier');
     this.answer = null;
   }
 
   async prompting() {
-    const answer: IOptions = await this.prompt([{
-      type: 'input',
-      name: 'name',
-      message: 'project name'
-    }, {
-      type: 'confirm',
-      name: 'react',
-      message: 'is a React project?'
-    }, {
-      type: 'list',
-      name: 'type',
-      choices: ['JS', 'TS', 'ES'],
-      message: 'what kind of the project?',
-      default: 'TS'
-    }, {
-      type: 'checkbox',
-      name: 'tags',
-      choices: [{
-        name: '文档',
-        value: 'doc'
-      }, {
-        name: '应用',
-        value: 'app',
-        checked: true
-      }, {
-        name: '组件库',
-        value: 'comp',
-        disabled: true
-      }],
-      message: 'project tags'
-    }]);
+    const answer: IOptions = await this.prompt([
+      {
+        type: 'input',
+        name: 'name',
+        message: 'project name',
+      },
+      {
+        type: 'confirm',
+        name: 'react',
+        message: 'is a React project?',
+      },
+      {
+        type: 'list',
+        name: 'type',
+        choices: ['JS', 'TS', 'ES'],
+        message: 'what kind of the project?',
+        default: 'TS',
+      },
+      {
+        type: 'checkbox',
+        name: 'tags',
+        choices: [
+          {
+            name: '文档',
+            value: 'doc',
+          },
+          {
+            name: '应用',
+            value: 'app',
+            checked: true,
+          },
+          {
+            name: '组件库',
+            value: 'comp',
+            disabled: true,
+          },
+        ],
+        message: 'project tags',
+      },
+    ]);
 
     this.answer = answer;
     return answer;
   }
-
-
 
   writing() {
     const sourceRoot = this.sourceRoot();
@@ -87,7 +94,7 @@ export default class ProjectGenerator extends Generator {
               tags: this.answer?.tags,
               path: this.options.path,
               prettier: this.options.prettier,
-              escapeStr: '   <div>hello</div>'
+              escapeStr: '   <div>hello</div>',
             });
           }
         })

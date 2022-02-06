@@ -1,7 +1,7 @@
 import { Command } from 'commander';
 import glob from 'glob';
 import Init from './yeoman';
-import proxy, {close} from './anyproxy';
+import proxy, { close } from './anyproxy';
 
 import pkg from '../package.json';
 
@@ -38,24 +38,31 @@ Example call:
 
   program.addHelpText('beforeAll', `hello world ******`);
 
-  program
-    .command('glob')
-    .action(() => {
-      console.log('$', glob.sync('*.js', {
+  program.command('glob').action(() => {
+    console.log(
+      '$',
+      glob.sync('*.js', {
         ignore: 'node_modules/**/*.js',
-        matchBase: true
-      }));
-      console.log('$$', glob.sync('.*.js'));
-      console.log('$$$', glob.sync('*.{js,json,ts}', {
+        matchBase: true,
+      })
+    );
+    console.log('$$', glob.sync('.*.js'));
+    console.log(
+      '$$$',
+      glob.sync('*.{js,json,ts}', {
         ignore: 'node_modules/**/*.*',
-        matchBase: true
-      }));
+        matchBase: true,
+      })
+    );
 
-      console.log('$$$$', glob.sync('c?*.{js,json,ts}', {
+    console.log(
+      '$$$$',
+      glob.sync('c?*.{js,json,ts}', {
         ignore: 'node_modules/**/*.*',
-        matchBase: true
-      }));
-    });
+        matchBase: true,
+      })
+    );
+  });
 
   program
     .command('project')
@@ -64,15 +71,13 @@ Example call:
     .action((path, options) => {
       console.log(path, options);
       init.init('project', {
-        prettier: true
+        prettier: true,
       });
     });
 
-  program
-    .command('component')
-    .action(() => {
-      init.init('component');
-    });
+  program.command('component').action(() => {
+    init.init('component');
+  });
 
   program
     .command('proxy')
@@ -86,6 +91,10 @@ Example call:
     });
 
   program.parse();
-
+  const hello = 'hekk';
+  const test = {
+    hello: '123',
+  };
+  console.log(hello, test);
   console.log('+++', program.opts().debug, program.opts().inputType);
 };

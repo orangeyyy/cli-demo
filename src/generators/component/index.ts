@@ -1,20 +1,29 @@
-import Generator, {GeneratorOptions} from 'yeoman-generator';
+import Generator, { GeneratorOptions } from 'yeoman-generator';
 import path from 'path';
 import fs from 'fs-extra';
 import chalk from 'chalk';
 import walker from 'walker';
 
-
 export function littleCamel(name: string) {
-  return name.replace(/^[\d|\W]*|\W*$/g, '').replace(/^([A-Z])/, a => a.toLowerCase()).replace(/\W+([a-zA-Z1-9])/g, (res, a) => a.toUpperCase());
+  return name
+    .replace(/^[\d|\W]*|\W*$/g, '')
+    .replace(/^([A-Z])/, (a) => a.toLowerCase())
+    .replace(/\W+([a-zA-Z1-9])/g, (res, a) => a.toUpperCase());
 }
 
 export function bigCamel(name: string) {
-  return name.replace(/^[\d|\W]*|\W*$/g, '').replace(/^([a-z])/, a => a.toUpperCase()).replace(/\W+([a-zA-Z1-9])/g, (res, a) => a.toUpperCase());
+  return name
+    .replace(/^[\d|\W]*|\W*$/g, '')
+    .replace(/^([a-z])/, (a) => a.toUpperCase())
+    .replace(/\W+([a-zA-Z1-9])/g, (res, a) => a.toUpperCase());
 }
 
 export function pascal(name: string) {
-  return name.replace(/^[\d|\W]*|\W*$/g, '').replace(/^([A-Z])/, a => a.toLowerCase()).replace(/\W*([0-9A-Z])/g, (res, a) => `-${a.toLowerCase()}`).replace(/\W+([a-z])/g, (res, a) => `-${a.toLowerCase()}`);
+  return name
+    .replace(/^[\d|\W]*|\W*$/g, '')
+    .replace(/^([A-Z])/, (a) => a.toLowerCase())
+    .replace(/\W*([0-9A-Z])/g, (res, a) => `-${a.toLowerCase()}`)
+    .replace(/\W+([a-z])/g, (res, a) => `-${a.toLowerCase()}`);
 }
 
 export interface IOptions {
@@ -32,23 +41,24 @@ export default class CompGenerator extends Generator {
   }
 
   async prompting() {
-    const answer: IOptions = await this.prompt([{
-      type: 'input',
-      name: 'name',
-      message: 'component name'
-    }, {
-      type: 'list',
-      name: 'type',
-      choices: ['class', 'function'],
-      message: 'what kind of the component?',
-      default: this.config.get('type') || 'class'
-    }]);
+    const answer: IOptions = await this.prompt([
+      {
+        type: 'input',
+        name: 'name',
+        message: 'component name',
+      },
+      {
+        type: 'list',
+        name: 'type',
+        choices: ['class', 'function'],
+        message: 'what kind of the component?',
+        default: this.config.get('type') || 'class',
+      },
+    ]);
 
     this.answer = answer;
     return answer;
   }
-
-
 
   writing() {
     const sourceRoot = this.sourceRoot();
@@ -84,7 +94,6 @@ export default class CompGenerator extends Generator {
         });
     });
   }
-
 
   end() {
     this.log('component init finished !!!');
