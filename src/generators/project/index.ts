@@ -28,7 +28,7 @@ export default class ProjectGenerator extends Generator {
       {
         type: 'input',
         name: 'name',
-        message: 'project name',
+        message: 'project name'
       },
       {
         type: 'confirm',
